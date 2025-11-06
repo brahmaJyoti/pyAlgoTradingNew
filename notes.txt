@@ -1,0 +1,8 @@
+Color codes
+https://lawlesscreation.github.io/hex-color-visualiser/
+
+Color palette tool
+https://coolors.co/visualizer/424874-dcd6f7-a6b1e1-cacfd6-d6e5e3
+
+Market Analysis Program Ideas
+https://www.marketcalls.in/python/nifty-monthly-returns-heatmap-generation-using-yfinance-and-seaborn.html
