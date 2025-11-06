@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Wizard</title>
+<!-- Link to external CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<!-- Plotly CDN link moved to the end of the body for guaranteed loading order -->
+</head>
+<body>
+<div class="container">
+<h1 class="header">
+Stock Wizard
+</h1>
+
+    <form id="analysis-form">
+        <!-- input-group now manages all inputs AND the button for a condensed layout -->
+        <div class="input-group">
+
+            <!-- 1. Stock Ticker Input (Row 1, Col 1) -->
+            <div class="form-field autocomplete">
+                <label for="ticker-input">Stock Ticker</label>
+                <input
+                    type="text"
+                    id="ticker-input"
+                    name="ticker"
+                    placeholder="e.g., MSFT"
+                    required
+                    value="{{ ticker }}"
+                    class="input-full"
+                    autocomplete="off"
+                >
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+
+            <!-- 2. Initial Sum Input (Row 1, Col 2) -->
+            <div class="form-field">
+                <label for="initial-sum-input">Starting Sum ($)</label>
+                <input
+                    type="number"
+                    id="initial-sum-input"
+                    name="initial_sum"
+                    placeholder="e.g., 1000"
+                    required
+                    value="{{ INITIAL_SUM }}"
+                    class="input-small"
+                    step="100"
+                >
+            </div>
+
+            <!-- 3. Growth Target Input (Row 1, Col 3) -->
+            <div class="form-field">
+                <label for="growth-target-input">Profit Target (%)</label>
+                <input
+                    type="number"
+                    id="growth-target-input"
+                    name="growth_target"
+                    placeholder="e.g., 10"
+                    required
+                    value="{{ GROWTH_TARGET }}"
+                    class="input-small"
+                    step="1"
+                >
+            </div>
+
+            <!-- 4. Short MA Input (Row 2, Col 1) -->
+            <div class="form-field">
+                <label for="short-ma-input">Short MA (Days)</label>
+                <input
+                    type="number"
+                    id="short-ma-input"
+                    name="short_ma_period"
+                    placeholder="e.g., 20"
+                    required
+                    value="{{ SHORT_MA_PERIOD }}"
+                    class="input-small"
+                >
+            </div>
+
+            <button
+                type="button"
+                id="analyze-btn"
+                class="analyze-button"
+            >
+                Analyze Crossover & Strategies
+            </button>
+
+            <!-- 5. Long MA Input (Row 2, Col 2) -->
+            <div class="form-field">
+                <label for="long-ma-input">Long MA (Weeks)</label>
+                <input
+                    type="number"
+                    id="long-ma-input"
+                    name="long_ma_period"
+                    placeholder="e.g., 50"
+                    required
+                    value="{{ LONG_MA_PERIOD }}"
+                    class="input-small"
+                >
+            </div>
+
+            <!-- 6. Start Date Input (This is now explicitly positioned to the 3rd row by CSS) -->
+            <div class="form-field">
+                <label for="date-input">Start Date</label>
+                <input
+                    type="date"
+                    id="date-input"
+                    name="start_date"
+                    placeholder="YYYY-MM-DD"
+                    required
+                    value="{{ START_DATE }}"
+                    class="input-small"
+                >
+            </div>
+
+            <!-- 7. Analyze Button (This is now explicitly positioned to the 2nd row by CSS) -->
+
+
+        </div> <!-- End of input-group -->
+    </form>
+
+    <div id="results">
+        <div id="message-container"></div>
+        <div class="loader" id="loader">Analyzing Daily Data and Running Simulations...</div>
+
+        <div id="comparison-summary" style="display: none;"></div>
+
+        <div id="chart-container"></div>
+        <div id="table-container">
+            <!-- This will hold the signal table and MA-only summary -->
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPTS MOVED TO THE END OF BODY FOR RELIABLE LOADING ORDER -->
+<!-- 1. Add Plotly.js CDN (Dependency must load first) -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<!-- 2. Link to external JavaScript (Dependent script must load second) -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+</html>
